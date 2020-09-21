@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use TCG\Voyager\VoyagerServiceProvider;
 
 class Install extends Command
 {
