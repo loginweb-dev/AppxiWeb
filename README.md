@@ -31,9 +31,9 @@ Para la instalación de APPSI se deben seguir algunos pasos que se describen a c
 
 - *Clonar el proyecto desde le repositorio*
     ```bash
-    git clone https://github.com/augustogany/appsi.git && cd appsi
+    git clone https://github.com/loginweb-dev/appxi.git && cd appsi
     ```
-- *Crear la base de datos "appsi"*
+- *Crear la base de datos "appxi"*
 - *Copiar el archivo .env y editar los datos de usuario del gestos de base de datos*
     ```bash
     cp .env.example .env && nano .env
@@ -54,9 +54,9 @@ Nota: Antes de instalar las dependencias debes asegurarte que tu entorno cumple 
 - Tokenizer PHP Extension
 - XML PHP Extension
 
-- *Instalar APPSI*
+- *Instalar APPXI*
     ```bash
-    php artisan appsi:install
+    php artisan appxi:install
     ```
 - *Luego de instalar todas las dependias se recomienda ejecutar el siguiente comando*
     ```bash
@@ -65,5 +65,5 @@ Nota: Antes de instalar las dependencias debes asegurarte que tu entorno cumple 
 
 - *Dar permiso al directorio storage*
     ```bash
-    chmod -R 777 storage
+    chmod -R 777 storage bootstrap/cache
     ```

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use TCG\Voyager\VoyagerServiceProvider;
 
 class Install extends Command
 {
@@ -11,7 +12,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'appsi:install';
+    protected $signature = 'appxi:install';
 
     /**
      * The console command description.
