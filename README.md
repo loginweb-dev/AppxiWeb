@@ -56,7 +56,7 @@ Nota: Antes de instalar las dependencias debes asegurarte que tu entorno cumple 
 
 - *Instalar APPSI*
     ```bash
-    php artisan voyager:install
+    php artisan appsi:install
     ```
 - *Luego de instalar todas las dependias se recomienda ejecutar el siguiente comando*
     ```bash
