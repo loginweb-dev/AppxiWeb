@@ -116,9 +116,24 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => $count++
                 ])->save();
             }
-        
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id' => $menu->id,
+                'title'   => 'Drivers',
+                'url'     => '',
+                'route'   => 'voyager.drivers.index',
+            ]);
 
-        //-------------------------- BREAD -------------------
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-double-right',
+                    'color'      => null,
+                    'parent_id'  => $AdminMenuItem->id,
+                    'order'      => $count++
+                ])->save();
+            }
+
+        //-------------------------- BREAD CUSTOMER -------------------
             $menu = Menu::where('name', 'customers')->firstOrFail();
             $count=1;
             $menuItem = MenuItem::firstOrNew([
@@ -151,7 +166,21 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => $count++,
                 ])->save();
             }
-
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id' => $menu->id,
+                'title'   => 'Ubicaciones',
+                'url'     => 'admin/customer_locations',
+                'route'   => ''
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => null,
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => $count++,
+                ])->save();
+            }
             $menuItem = MenuItem::firstOrNew([
                 'menu_id' => $menu->id,
                 'title'   => 'divider',
@@ -184,5 +213,69 @@ class MenuItemsTableSeeder extends Seeder
             }
 
         //-------------------------------------------------
+
+        //-------------------------- BREAD DRIVERS -------------------
+        $menudriver = Menu::where('name', 'drivers')->firstOrFail();
+        $count=1;
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menudriver->id,
+            'title'   => 'Listar los Choferes',
+            'url'     => 'admin/drivers/1',
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menudriver->id,
+            'title'   => 'Nuevos Choferes',
+            'url'     => 'admin/drivers/create',
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menudriver->id,
+            'title'   => 'divider',
+            'url'     => null,
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menudriver->id,
+            'title'   => 'setting',
+            'url'     => null,
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_blank',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
     }
 }
