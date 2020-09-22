@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('login/{social}', 'SocialiteController@redirectToProvider')->name('socialLogin');
+Route::get('login/{social}/callback', 'SocialiteController@handleProviderCallback');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
