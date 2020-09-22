@@ -130,7 +130,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Ubicaciones',
                 'icon'                  => 'voyager-params',
                 'model_name'            => 'App\\CustomerLocation',
-                'controller'            => 'App\\Http\\Controllers\\CustomerController',
+                'controller'            => 'App\\Http\\Controllers\\CustomerLocationController',
                 'generate_permissions'  => 1,
                 'description'           => null,
                 'server_side'           => 1,
@@ -144,6 +144,30 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
         // customer_locations ----------------------------------
+
+        // drivers----------------------------------------------
+        $dataType = $this->dataType('slug', 'drivers');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'drivers',
+                'display_name_singular' => 'Driver',
+                'display_name_plural'   => 'Drivers',
+                'icon'                  => 'voyager-params',
+                'model_name'            => 'App\\Driver',
+                'controller'            => 'App\\Http\\Controllers\\DriverController',
+                'generate_permissions'  => 1,
+                'description'           => null,
+                'server_side'           => 1,
+                'details'               => [
+                    'order_column'         => 'id',
+                    'order_display_column' => 'id',
+                    'order_direction'      => 'asc',
+                    'default_search_key'   => 'id',
+                    'scope'                => null
+                ]
+            ])->save();
+        }
+        //end drivers------------------------------------------
     }
 
     protected function dataType($field, $for)

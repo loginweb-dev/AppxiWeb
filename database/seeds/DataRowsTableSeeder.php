@@ -16,7 +16,8 @@ class DataRowsTableSeeder extends Seeder
 
         $CustomerDataType = DataType::where('slug', 'customers')->firstOrFail();
         $CustomerLocationDataType = DataType::where('slug', 'customer_locations')->firstOrFail();
-
+        
+        $DriverDataType = DataType::where('slug', 'drivers')->firstOrFail();
 
         $count = 1;
         $dataRow = $this->dataRow($userDataType, 'id');
@@ -912,7 +913,189 @@ class DataRowsTableSeeder extends Seeder
                 ]
             ])->save();
         }
+        $dataRow = $this->dataRow($CustomerDataType, 'customer_belongsto_user_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => __('User'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'model'       => 'TCG\\Voyager\\Models\\User',
+                    'table'       => 'users',
+                    'type'        => 'belongsTo',
+                    'column'      => 'user_id',
+                    'key'         => 'id',
+                    'label'       => 'name',
+                    'pivot_table' => 'migrations',
+                    'pivot'       => 0,
+                    'taggable'    => 0
+                ],
+                'order'        => $count++,
+            ])->save();
+        }
         //customers-------------------------------------------------
+
+        //drivers--------------------------------------------
+        //-----------------------------------------------------
+        $count = 1;
+        $dataRow = $this->dataRow($DriverDataType, 'id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'number',
+                'display_name' => __('voyager::seeders.data_rows.id'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'first_name');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => 'Nombre',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'last_name');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => 'Apellidos',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'phone');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => 'Telefono',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'user_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'Traking',
+                'display_name' => 'Traking',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'created_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('voyager::seeders.data_rows.created_at'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'updated_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('voyager::seeders.data_rows.updated_at'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($DriverDataType, 'deleted_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => 'deleted_at',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        //drivers--------------------------------------------
         
     }
 }
