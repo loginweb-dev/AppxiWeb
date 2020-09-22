@@ -19,8 +19,17 @@ class MenusTableSeeder extends Seeder
         Menu::firstOrCreate([
             'name' => 'LandingPage',
         ]);
+
         Menu::firstOrCreate([
             'name' => 'social',
+        ]);
+
+        Menu::firstOrCreate([
+            'name' => 'customers',
+        ]);
+
+        Menu::firstOrCreate([
+            'name' => 'customer_locations',
         ]);
     }
 }

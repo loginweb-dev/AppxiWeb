@@ -41,6 +41,8 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::generateFor('customers');
 
+        Permission::generateFor('customer_locations');
+
         Permission::generateFor('vehicles');
     }
 }
