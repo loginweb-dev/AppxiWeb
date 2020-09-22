@@ -31,5 +31,9 @@ class MenusTableSeeder extends Seeder
         Menu::firstOrCreate([
             'name' => 'customer_locations',
         ]);
+
+        Menu::firstOrCreate([
+            'name' => 'drivers',
+        ]);
     }
 }

@@ -798,7 +798,7 @@ class DataRowsTableSeeder extends Seeder
                     ]
                 ]
             ])->save();
-
+        }
         $dataRow = $this->dataRow($CustomerDataType, 'phone');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -1022,7 +1022,7 @@ class DataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($DriverDataType, 'user_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'Traking',
+                'type'         => 'hidden',
                 'display_name' => 'Traking',
                 'required'     => 0,
                 'browse'       => 0,
@@ -1095,10 +1095,34 @@ class DataRowsTableSeeder extends Seeder
                 ]
             ])->save();
         }
+        $dataRow = $this->dataRow($DriverDataType, 'driver_belongsto_user_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => __('User'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'model'       => 'TCG\\Voyager\\Models\\User',
+                    'table'       => 'users',
+                    'type'        => 'belongsTo',
+                    'column'      => 'user_id',
+                    'key'         => 'id',
+                    'label'       => 'name',
+                    'pivot_table' => 'migrations',
+                    'pivot'       => 0,
+                    'taggable'    => 0
+                ],
+                'order'        => $count++,
+            ])->save();
+        }
         //drivers--------------------------------------------
         
     }
-}
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
