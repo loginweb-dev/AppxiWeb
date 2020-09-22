@@ -47,6 +47,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="{{ asset('vendor/whatsapp/floating-wpp.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/up/css/floating-totop-button.css') }}">
     @laravelPWA
 </head>
 
@@ -889,6 +891,7 @@
   </footer>
   <!--/Footer-->
 
+  <div id="myWP"></div>
 
   <!-- SCRIPTS -->
 
@@ -904,9 +907,46 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="vendor/mdb/js/mdb.min.js"></script>
 
+    <!-- Custom scripts -->
+  <script src="{{ asset('vendor/whatsapp/floating-wpp.js') }}"></script>
+  <script src="{{ asset('vendor/up/js/floating-totop-button.js') }}"></script>
+
   <script>
     //Animation init
     new WOW().init();
+     // whatsapp ----------------------------------------------------------------------------------
+    $('#myWP').floatingWhatsApp({
+      phone: '{{ setting('whatsapp.phone') }}',
+      popupMessage: '{{ setting('whatsapp.popupMessage') }}',
+      message: '{{ setting('whatsapp.message') }}',
+      showPopup: true,
+      showOnIE: true,
+      headerTitle: '{{ setting('whatsapp.headerTitle') }}',
+      headerColor: '{{ setting('whatsapp.color') }}',
+      backgroundColor: '{{ setting('whatsapp.color') }}',
+      // buttonImage: '<img src="{{ Voyager::Image(setting('whatsapp.buttonImage' )) }}" />',
+      position: '{{ setting('whatsapp.position') }}',
+      // autoOpenTimeout: {{ setting('whatsapp.autoOpenTimeout') }},
+      size: '{{ setting('whatsapp.size') }}'
+    });
+
+    // buttun up ----------------------------------------------------------------------
+    $("body").toTopButton({
+      // path to icons
+      imagePath: 'vendor/up/img/icons/',
+      // arrow, arrow-circle, caret, caret-circle, circle, circle-o, arrow-l, drop, rise, top
+      // or your own SVG icon
+      arrowType: 'arrow',
+      // 'w' = white
+      // 'b' = black
+      iconColor: 'w',
+      // icon shadow
+      // from 1 to 16
+      iconShadow: 6
+    });
+
+    $( "blockquote" ).addClass( "blockquote" );
+
 
   </script>
 

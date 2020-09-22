@@ -1,69 +1,65 @@
-<h1 align="center">APPSI</h1>
+# Sobre appxi v1.0
 
-## Acerca de APPSI
+La herramienta incluye herramienta y paquete de terceros:
 
-## Características
+- [Laravel Framework v7](https://laravel.com/)
 
-- **Administración de Clientes.**
-- **Seguimiento de tramos recorridos por los vehiculos.**
-- **Administración de precios por kilometro o millas.**
-- **Administración de metodos de pago cash o por cuenta bancaria.**
-- **Administracion de Conductores de vehiculos.**
+# Requerimientos en el Servidor de producción
+### Step #1
+- LEMP (Ubuntu 18.04)
+- Let’s Encrypt 
+- Php Extenciones
+- NodeJs & Npm
 
-## Componentes
+> php7.4-mbstring
 
-APPSI está desarrollado bajo el lenguaje PHP, pero también utiliza librerias basadas en el lenguaje JavaScript. Las herramientas sobre las que está desarrollado APPSI son:
+> php7.4-bcmath
 
-- **[Laravel](https://vehikl.com/)**
-- **[Admin Voyager](https://tighten.co)**
-- **[laravel-dompdf](https://github.com/barryvdh/laravel-dompdf)**
-- **[Laravel-Excel](https://github.com/Maatwebsite/Laravel-Excel)**
-- **[Intervention Image](http://image.intervention.io/)**
-- **[simple-qrcode](https://github.com/SimpleSoftwareIO/simple-qrcode)**
-- **[Numeros-en-Letras](https://github.com/villca/Numeros-en-Letras)**
-- **[barcode](https://github.com/milon/barcode)**
-- **[laravel-mix](https://laravel.com/docs/7.x/mix)**
-- **[Laravel Socialite](https://laravel.com/docs/7.x/socialite)**
+> php7.4-gd
 
-## Instalación
+> php7.4-dom
 
-Para la instalación de APPSI se deben seguir algunos pasos que se describen a continuación.
+> php7.4-curl
 
-- *Clonar el proyecto desde le repositorio*
-    ```bash
-    git clone https://github.com/loginweb-dev/appxi.git && cd appsi
-    ```
-- *Crear la base de datos "appxi"*
-- *Copiar el archivo .env y editar los datos de usuario del gestos de base de datos*
-    ```bash
-    cp .env.example .env && nano .env
-    ```
-- *Instalar dependencias de composer*
-    ```bash
-    composer install
-    ```
-Nota: Antes de instalar las dependencias debes asegurarte que tu entorno cumple con los requerimientos necesarios en **[Requerimientos Laravel]
-- PHP >= 7.2.5
-- BCMath PHP Extension
-- Ctype PHP Extension
-- Fileinfo PHP extension
-- JSON PHP Extension
-- Mbstring PHP Extension
-- OpenSSL PHP Extension
-- PDO PHP Extension
-- Tokenizer PHP Extension
-- XML PHP Extension
+> php7.4-zip
 
-- *Instalar APPXI*
-    ```bash
-    php artisan appxi:install
-    ```
-- *Luego de instalar todas las dependias se recomienda ejecutar el siguiente comando*
-    ```bash
-    composer dump-autoload
-    ```
+# Instalador 
+### Step #1
+Clona el repositorio oficial e instala las dependencias
+- git clone
+- composer install
+- npm install
+- npm run prod
 
-- *Dar permiso al directorio storage*
-    ```bash
-    chmod -R 777 storage bootstrap/cache
-    ```
+### Step #2
+Configura el erchivo .env (Variales de Entorno) y permisos
+-   cp .env.example .env
+-   edit .env (nano)   
+-   chmod -R 777 storage/ bootstrap/ public/
+
+### Step #3
+Realizar la instalcion mediante el comando:
+- php artisan appxi:install
+
+### Step #4
+Ingresa a http://tudominio/admin - Login de super usuario:
+-   admin@admin.com 
+-   password
+
+# appxi Sponsors
+
+La empresa detras del Diseño y Creacion del appxi v2020 es:
+
+- ***[LoginWeb - Empresa de Diseño y Desarrollo de Hardware y Software](https://loginweb.dev/)***
+
+### Contributing
+
+Los desarrolladores del appxi son los Ingenieros:
+- [Ing. Percy Alvarez - 71130523](#)
+- [Ing. Raul Montero](#)
+- [Ing. Agustin Mejia](#)
+
+
+### License
+
+appxi v2020 is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
