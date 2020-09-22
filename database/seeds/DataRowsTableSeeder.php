@@ -802,7 +802,7 @@ class DataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Tipo',
+                'display_name' => 'Telefono',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -821,7 +821,7 @@ class DataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Nombre',
+                'display_name' => 'Carnet o NIT',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,

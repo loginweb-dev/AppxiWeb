@@ -209,10 +209,12 @@ return [
     'additional_css' => [
         //'css/custom.css',
         'theme.css',
+        
     ],
 
     'additional_js' => [
         //'js/custom.js',
+        'https://cdn.jsdelivr.net/npm/sweetalert2@9',
     ],
 
     'googlemaps' => [
