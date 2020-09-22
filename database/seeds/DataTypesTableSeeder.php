@@ -89,6 +89,42 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2020-09-21 20:57:17',
                 'updated_at' => '2020-09-21 21:06:54',
             ),
+            4 => 
+            array (
+                'id' => 6,
+                'name' => 'customers',
+                'slug' => 'customers',
+                'display_name_singular' => 'Customer',
+                'display_name_plural' => 'Customers',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\Customer',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2020-09-21 21:37:16',
+                'updated_at' => '2020-09-21 21:38:12',
+            ),
+            5 => 
+            array (
+                'id' => 7,
+                'name' => 'vehicles',
+                'slug' => 'vehicles',
+                'display_name_singular' => 'Vehicle',
+                'display_name_plural' => 'Vehicles',
+                'icon' => 'voyager-compass',
+                'model_name' => 'App\\Models\\Vehicle',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 1,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":"placa","scope":null}',
+                'created_at' => '2020-09-21 21:50:22',
+                'updated_at' => '2020-09-21 21:52:18',
+            ),
         ));
         
         
