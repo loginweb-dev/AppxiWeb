@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use TCG\Voyager\Facades\Voyager;
 use App\FormFields\Tracking;
+use App\FormFields\Map;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Voyager::addFormField(Tracking::class);
+        Voyager::addFormField(Map::class);
     }
 
     /**
