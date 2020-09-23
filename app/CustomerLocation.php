@@ -9,5 +9,5 @@ class CustomerLocation extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'customer_locations';
-    protected $fillable = ['type', 'direction', 'latitud', 'longitud', 'customer_id'];
+    protected $fillable = ['type', 'direction', 'latitud', 'longitud', 'customer_id','maps'];
 }

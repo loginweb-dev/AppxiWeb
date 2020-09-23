@@ -168,9 +168,9 @@ class MenuItemsTableSeeder extends Seeder
             }
             $menuItem = MenuItem::firstOrNew([
                 'menu_id' => $menu->id,
-                'title'   => 'Ubicaciones',
-                'url'     => 'admin/customer_locations',
-                'route'   => ''
+                'title'   => 'Nueva ubicacion',
+                'url'     => 'admin/customer_locations/create',
+                'route'   => null
             ]);
             if (!$menuItem->exists) {
                 $menuItem->fill([

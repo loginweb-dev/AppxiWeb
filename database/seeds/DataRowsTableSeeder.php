@@ -10,13 +10,13 @@ class DataRowsTableSeeder extends Seeder
         $userDataType = DataType::where('slug', 'users')->firstOrFail();
         $menuDataType = DataType::where('slug', 'menus')->firstOrFail();
         $roleDataType = DataType::where('slug', 'roles')->firstOrFail();
-        
+
         $PageDataType = DataType::where('slug', 'pages')->firstOrFail();
         $BlockDataType = DataType::where('slug', 'blocks')->firstOrFail();
 
         $CustomerDataType = DataType::where('slug', 'customers')->firstOrFail();
         $CustomerLocationDataType = DataType::where('slug', 'customer_locations')->firstOrFail();
-        
+
         $DriverDataType = DataType::where('slug', 'drivers')->firstOrFail();
 
         $count = 1;
@@ -541,7 +541,7 @@ class DataRowsTableSeeder extends Seeder
         }
         //pages------------------------------
 
-        
+
 
 
 
@@ -775,7 +775,7 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
         //Blocks-------------------------------------------------
-        
+
 
         //customers--------------------------------------------
         //-----------------------------------------------------
@@ -938,7 +938,234 @@ class DataRowsTableSeeder extends Seeder
                 'order'        => $count++,
             ])->save();
         }
+
         //customers-------------------------------------------------
+
+        //customer-locations--------
+        $count = 1;
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'number',
+                'display_name' => __('voyager::seeders.data_rows.id'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'customer_locations_belongsto_customer_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => __('Customer'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '6',
+                    ],
+                    'model'       => 'App\\Customer',
+                    'table'       => 'customers',
+                    'type'        => 'belongsTo',
+                    'column'      => 'customer_id',
+                    'key'         => 'id',
+                    'label'       => 'phone',
+                    'pivot_table' => 'migrations',
+                    'pivot'       => 0,
+                    'taggable'    => 0
+                ],
+                'order'        => $count++,
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'type');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_dropdown',
+                'display_name' => 'Tipo',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ],
+                    "options" => [
+                        "casa" => "Casa",
+                        "domicilio" => "Domicilio"
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'direction');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text_area',
+                'display_name' => 'Direccion',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'maps');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'Map',
+                'display_name' => 'Latitud y Longitud',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'latitud');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'hidden',
+                'display_name' => 'Latitud',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'longitud');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'hidden',
+                'display_name' => 'Longitud',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'customer_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'hidden',
+                'display_name' => 'Trackin Customer',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ],
+                'order'        => $count++
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'created_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('voyager::seeders.data_rows.created_at'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'updated_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('voyager::seeders.data_rows.updated_at'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($CustomerLocationDataType, 'deleted_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => 'deleted_at',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        //customer-locations------------
 
         //drivers--------------------------------------------
         //-----------------------------------------------------
@@ -1121,7 +1348,7 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
         //drivers--------------------------------------------
-        
+
     }
     protected function dataRow($type, $field)
     {

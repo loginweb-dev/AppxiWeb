@@ -1,4 +1,4 @@
-@can('add', app($dataType->model_name))    
+@can('add', app($dataType->model_name))
     <div class="page-content container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -35,8 +35,8 @@
                                                         $model = app($row->details->model);
                                                         $query = $model::all();
                                                     @endphp
-                                                    <select 
-                                                        class="form-control select2" 
+                                                    <select
+                                                        class="form-control select2"
                                                         name="{{ $row->details->{'column'} }}"
                                                         id="{{ $row->details->{'column'} }}">
                                                         <option disabled>-- Seleciona datos --</option>
@@ -46,13 +46,13 @@
                                                     </select>
                                                 @endif
                                             @elseif($row->details->{'type'} == 'belongsToMany')
-                                               
+
                                                 @php
                                                     $model = app($row->details->model);
                                                     $query = $model::all();
                                                 @endphp
-                                                <select 
-                                                    class="form-control select2" 
+                                                <select
+                                                    class="form-control select2"
                                                     name="{{ $row->field }}[]"
                                                     id="{{ $row->field }}" multiple>
                                                     <option disabled>-- Seleciona datos --</option>
@@ -71,16 +71,16 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <select 
-                                                class="form-control select2" 
-                                                name="{{ $row->field }}" 
+                                            <select
+                                                class="form-control select2"
+                                                name="{{ $row->field }}"
                                                 id="{{ $row->field }}">
                                                     <option disabled>-- Seleciona un dato --</option>
                                                 @foreach ($row->details->options  as $item)
                                                     <option value="{{ $item }}">{{ $item }}</option>
                                                 @endforeach
                                             </select>
-                                            
+
                                             @break
                                         @case('text')
                                             <label class="control-label" for="{{ $row->field }}"  id="{{ $row->field }}">{{ $row->display_name }}</label>
@@ -91,12 +91,12 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="text" 
-                                                class="form-control" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}"  
-                                                placeholder="{{ $row->display_name }}" 
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
+                                                placeholder="{{ $row->display_name }}"
                                                 value="@if(isset($row->details->{'default'})){{ $row->details->{'default'} }}@endif">
                                             @break
                                         @case('password')
@@ -108,12 +108,12 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="password" 
-                                                class="form-control" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}" 
-                                                placeholder="{{ $row->field }}" 
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
+                                                placeholder="{{ $row->field }}"
                                                 value="@if(isset($row->details->{'default'})){{ $row->details->{'default'} }}@endif">
                                             @break
                                         @case('number')
@@ -125,13 +125,13 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="number" 
-                                                class="form-control" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}" 
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
                                                 value="@if(isset($row->details->{'default'})){{ $row->details->{'default'} }}@endif">
-                                            
+
                                             @break
                                         @case('text_area')
                                             <label class="control-label" for="{{ $row->field }}">{{ $row->display_name }}</label>
@@ -142,9 +142,9 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <textarea 
-                                                class="form-control" 
-                                                name="{{ $row->field }}" 
+                                            <textarea
+                                                class="form-control"
+                                                name="{{ $row->field }}"
                                                 id="{{ $row->field }}">@if(isset($row->details->{'default'})){{ $row->details->{'default'} }}@endif</textarea>
                                             @break
                                         @case('timestamp')
@@ -156,11 +156,11 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="datetime" 
-                                                class="form-control datepicker" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}" 
+                                            <input
+                                                type="datetime"
+                                                class="form-control datepicker"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
                                                 value="@if(isset($dataTypeContent->{$row->field})){{ \Carbon\Carbon::parse(old($row->field, $dataTypeContent->{$row->field}))->format('m/d/Y g:i A') }}@else{{old($row->field)}}@endif">
                                             @break
                                             {{ dd($row) }}
@@ -173,13 +173,13 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="time" 
-                                                class="form-control datepicker" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}" 
+                                            <input
+                                                type="time"
+                                                class="form-control datepicker"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
                                                 value="@if(isset($dataTypeContent->{$row->field})){{ \Carbon\Carbon::parse(old($row->field, $dataTypeContent->{$row->field}))->format('m/d/Y g:i A') }}@else{{old($row->field)}}@endif">
-                                            @break 
+                                            @break
                                         @case('date')
                                             <label class="control-label" for="{{ $row->field }}">{{ $row->display_name }}</label>
                                             @if(isset($row->details->tooltip))
@@ -189,13 +189,13 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="date" 
-                                                class="form-control datepicker" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}" 
+                                            <input
+                                                type="date"
+                                                class="form-control datepicker"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
                                                 value="@if(isset($dataTypeContent->{$row->field})){{ \Carbon\Carbon::parse(old($row->field, $dataTypeContent->{$row->field}))->format('m/d/Y g:i A') }}@else{{old($row->field)}}@endif">
-                                            @break        
+                                            @break
                                         @case('rich_text_box')
                                             <label class="control-label" for="{{ $row->field }}">{{ $row->display_name }}</label>
                                             @if(isset($row->details->tooltip))
@@ -205,9 +205,9 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <textarea 
-                                                class="ckeditor" 
-                                                name="{{ $row->field }}" 
+                                            <textarea
+                                                class="ckeditor"
+                                                name="{{ $row->field }}"
                                                 id="rich{{ $row->field }}"></textarea>
                                             @break
                                         @case('image')
@@ -219,12 +219,12 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="file" 
-                                                name="{{ $row->field }}" 
-                                                id="{{ $row->field }}" 
+                                            <input
+                                                type="file"
+                                                name="{{ $row->field }}"
+                                                id="{{ $row->field }}"
                                                 accept="image/*">
-                                            @break 
+                                            @break
                                         @case('multiple_images')
                                             <label class="control-label" for="{{ $row->field }}">{{ $row->display_name }}</label>
                                             @if(isset($row->details->tooltip))
@@ -234,11 +234,11 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <input 
-                                                type="file" 
-                                                name="{{ $row->field }}[]" 
-                                                id="{{ $row->field }}" 
-                                                multiple="multiple" 
+                                            <input
+                                                type="file"
+                                                name="{{ $row->field }}[]"
+                                                id="{{ $row->field }}"
+                                                multiple="multiple"
                                                 accept="image/*">
                                             @break
                                         @case('checkbox')
@@ -252,12 +252,12 @@
                                             @endif
                                             <br>
                                                 <?php $checked = $row->details->checked ?>
-                                                <input 
-                                                    type="checkbox" 
-                                                    name="{{ $row->field }}" 
-                                                    id="{{ $row->field }}" 
-                                                    class="toggleswitch" 
-                                                    data-on="{{ $row->details->on }}" {!! $checked ? 'checked="checked"' : '' !!} 
+                                                <input
+                                                    type="checkbox"
+                                                    name="{{ $row->field }}"
+                                                    id="{{ $row->field }}"
+                                                    class="toggleswitch"
+                                                    data-on="{{ $row->details->on }}" {!! $checked ? 'checked="checked"' : '' !!}
                                                     data-off="{{ $row->details->off }}">
                                             @break
                                         @case('Map')
@@ -282,9 +282,9 @@
                                                 data-placement="{{ $row->details->tooltip->{'ubication'} }}"
                                                 title="{{ $row->details->tooltip->{'message'} }}"></span>
                                             @endif
-                                            <select 
-                                                class="form-control select2" 
-                                                name="{{ $row->field }}[]" 
+                                            <select
+                                                class="form-control select2"
+                                                name="{{ $row->field }}[]"
                                                 id="{{ $row->field }}" multiple>
                                                 <option disabled>-- Seleciona un dato --</option>
                                                 @foreach ($row->details->options  as $item)
@@ -304,10 +304,10 @@
                                             <div id="{{ $row->field }}" class="ace_editor min_height_200" name="{{ $row->field }}"></div>
                                             <textarea name="{{ $row->field }}" id="{{ $row->field }}" class="hidden code_editor"></textarea>
                                             @break
-                                    @endswitch        
+                                    @endswitch
                                 </div>
                             @endforeach
-                            
+
                         </div>
                         <div class="form-group text-center">
                             <hr/>
@@ -318,13 +318,13 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 @else
   <div class="page-content edit-add container-fluid">
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-bordered">
-            <div class="panel-body text-center"> 
+            <div class="panel-body text-center">
               <h3>No tiene los permisos, para Crear</h3>
               <code>Consulte con el administrador de Sistema, para realizar la accion</code>
             </div>
@@ -339,7 +339,7 @@
 <script>
 
     $('.form-group input[type=datetime]').each(function (idx, elt) {
-        let id = '#'+elt.id; 
+        let id = '#'+elt.id;
         $(id).datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss'
         });
@@ -352,15 +352,15 @@
             message('success', 'Update - '+$(this).val());
         });
     });
-    
+
     $('[data-toggle="tooltip"]').tooltip();
-     
+
     $('.toggleswitch').bootstrapToggle();
 
     var frm = $('#myform');
     $("#button_submit").click(function() {
         event.preventDefault();
-        
+
         Swal.fire({
         title: 'Agregando',
         text: "Estas segur@ de realizar la accion ? ",
@@ -397,7 +397,7 @@
                         }
                     },
                     error: function (data) {
-                        $('#ajax_body').html('<div class="text-center"><h3><code>Ups, Ocurrio un error inesperado <br /><br /> 1.-Revise su configuracion <br /><br /> 2.-Vuela a intentarlo una vez mas <br /><br /> 3.-Consulte con el soporte tecnico</code></h3></div>'); 
+                        $('#ajax_body').html('<div class="text-center"><h3><code>Ups, Ocurrio un error inesperado <br /><br /> 1.-Revise su configuracion <br /><br /> 2.-Vuela a intentarlo una vez mas <br /><br /> 3.-Consulte con el soporte tecnico</code></h3></div>');
                         message('error', 'Error en la accion')
                     },
                 });
@@ -407,7 +407,7 @@
         })
     });
 
-   
+
     $('.form-group .ckeditor').each(function (idx, elt) {
         CKEDITOR.replace(elt.id);
     });
@@ -425,7 +425,7 @@
                 id: 'mapbox.streets'
             }).addTo(map);
 
-        function onLocationFound(e) 
+        function onLocationFound(e)
         {
             $('#latitud').val(e.latlng.lat);
             $('#longitud').val(e.latlng.lng);
@@ -461,5 +461,5 @@
             textarea.val(editor.getSession().getValue());
         });
     });
-    
+
 </script>
