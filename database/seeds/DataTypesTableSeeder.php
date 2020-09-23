@@ -5,7 +5,7 @@ use TCG\Voyager\Models\DataType;
 class DataTypesTableSeeder extends Seeder
 {
     public function run()
-    {       
+    {
         $dataType = $this->dataType('slug', 'users');
         if (!$dataType->exists) {
             $dataType->fill([
@@ -72,7 +72,7 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
         //pages ------------------------------------
-    
+
         // blocks ----------------------------------
         $dataType = $this->dataType('slug', 'blocks');
         if (!$dataType->exists) {
@@ -96,7 +96,7 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
         // blocks ----------------------------------
-        
+
         // Customers ----------------------------------
         $dataType = $this->dataType('slug', 'customers');
         if (!$dataType->exists) {
@@ -168,6 +168,30 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
         //end drivers------------------------------------------
+
+        // vehicles----------------------------------------------
+        $dataType = $this->dataType('slug', 'vehicles');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'vehicles',
+                'display_name_singular' => 'Vehicle',
+                'display_name_plural'   => 'Vehicles',
+                'icon'                  => 'voyager-params',
+                'model_name'            => 'App\\Vehicle',
+                'controller'            => 'App\\Http\\Controllers\\VehicleController',
+                'generate_permissions'  => 1,
+                'description'           => null,
+                'server_side'           => 1,
+                'details'               => [
+                    'order_column'         => 'id',
+                    'order_display_column' => 'id',
+                    'order_direction'      => 'asc',
+                    'default_search_key'   => 'id',
+                    'scope'                => null
+                ]
+            ])->save();
+        }
+        //end vehicles------------------------------------------
     }
 
     protected function dataType($field, $for)

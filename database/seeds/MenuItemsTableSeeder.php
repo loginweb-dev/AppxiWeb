@@ -83,8 +83,8 @@ class MenuItemsTableSeeder extends Seeder
                     'parent_id'  => $toolsMenuItem->id,
                     'order'      => $count++,
                 ])->save();
-            }  
-        
+            }
+
         //--------------------------------------------
         $AdminMenuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
@@ -121,6 +121,22 @@ class MenuItemsTableSeeder extends Seeder
                 'title'   => 'Drivers',
                 'url'     => '',
                 'route'   => 'voyager.drivers.index',
+            ]);
+
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-double-right',
+                    'color'      => null,
+                    'parent_id'  => $AdminMenuItem->id,
+                    'order'      => $count++
+                ])->save();
+            }
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id' => $menu->id,
+                'title'   => 'Vehicles',
+                'url'     => '',
+                'route'   => 'voyager.vehicles.index',
             ]);
 
             if (!$menuItem->exists) {
@@ -277,5 +293,70 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => $count++,
             ])->save();
         }
+
+          //-------------------------- BREAD VEHICLES -------------------
+          $menuvehicles = Menu::where('name', 'vehicles')->firstOrFail();
+          $count=1;
+          $menuItem = MenuItem::firstOrNew([
+              'menu_id' => $menuvehicles->id,
+              'title'   => 'Listar los Vehiculos',
+              'url'     => 'admin/vehicles/1',
+              'route'   => null
+          ]);
+          if (!$menuItem->exists) {
+              $menuItem->fill([
+                  'target'     => '_self',
+                  'icon_class' => null,
+                  'color'      => null,
+                  'parent_id'  => null,
+                  'order'      => $count++,
+              ])->save();
+          }
+          $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menuvehicles->id,
+            'title'   => 'Nuevos Vehiculos',
+            'url'     => 'admin/vehicles/create',
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menuvehicles->id,
+            'title'   => 'divider',
+            'url'     => null,
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menuvehicles->id,
+            'title'   => 'setting',
+            'url'     => null,
+            'route'   => null
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_blank',
+                'icon_class' => null,
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => $count++,
+            ])->save();
+        }
+
     }
 }

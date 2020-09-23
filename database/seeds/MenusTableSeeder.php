@@ -35,5 +35,9 @@ class MenusTableSeeder extends Seeder
         Menu::firstOrCreate([
             'name' => 'drivers',
         ]);
+
+        Menu::firstOrCreate([
+            'name' => 'vehicles',
+        ]);
     }
 }

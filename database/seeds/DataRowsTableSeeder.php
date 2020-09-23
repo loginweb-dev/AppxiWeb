@@ -18,6 +18,7 @@ class DataRowsTableSeeder extends Seeder
         $CustomerLocationDataType = DataType::where('slug', 'customer_locations')->firstOrFail();
 
         $DriverDataType = DataType::where('slug', 'drivers')->firstOrFail();
+        $VehicleDataType = DataType::where('slug', 'vehicles')->firstOrFail();
 
         $count = 1;
         $dataRow = $this->dataRow($userDataType, 'id');
@@ -799,6 +800,34 @@ class DataRowsTableSeeder extends Seeder
                 ]
             ])->save();
         }
+        $dataRow = $this->dataRow($CustomerDataType, 'customer_belongsto_user_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => __('User'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'display' => [
+                        'width'=> 6
+                    ],
+                    'model'       => 'TCG\\Voyager\\Models\\User',
+                    'table'       => 'users',
+                    'type'        => 'belongsTo',
+                    'column'      => 'user_id',
+                    'key'         => 'id',
+                    'label'       => 'name',
+                    'pivot_table' => 'migrations',
+                    'pivot'       => 0,
+                    'taggable'    => 0
+                ],
+                'order'        => $count++,
+            ])->save();
+        }
         $dataRow = $this->dataRow($CustomerDataType, 'phone');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -831,6 +860,10 @@ class DataRowsTableSeeder extends Seeder
                 'delete'       => 0,
                 'order'        => $count++,
                 'details' => [
+                    'tooltip' => [
+                        'ubication' => 'top',
+                        'message' => 'Campo Opcional'
+                    ],
                     'display' => [
                         'width' => 6
                     ]
@@ -913,31 +946,7 @@ class DataRowsTableSeeder extends Seeder
                 ]
             ])->save();
         }
-        $dataRow = $this->dataRow($CustomerDataType, 'customer_belongsto_user_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
-                'display_name' => __('User'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'model'       => 'TCG\\Voyager\\Models\\User',
-                    'table'       => 'users',
-                    'type'        => 'belongsTo',
-                    'column'      => 'user_id',
-                    'key'         => 'id',
-                    'label'       => 'name',
-                    'pivot_table' => 'migrations',
-                    'pivot'       => 0,
-                    'taggable'    => 0
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
+
 
         //customers-------------------------------------------------
 
@@ -1349,6 +1358,195 @@ class DataRowsTableSeeder extends Seeder
         }
         //drivers--------------------------------------------
 
+        //vehicles--------------------------------------------
+        //-----------------------------------------------------
+        $count = 1;
+        $dataRow = $this->dataRow($VehicleDataType, 'id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'number',
+                'display_name' => __('voyager::seeders.data_rows.id'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'vehicle_belongsto_driver_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => __('Driver'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '6',
+                    ],
+                    'model'       => 'App\\Driver',
+                    'table'       => 'drivers',
+                    'type'        => 'belongsTo',
+                    'column'      => 'driver_id',
+                    'key'         => 'id',
+                    'label'       => 'first_name',
+                    'pivot_table' => 'migrations',
+                    'pivot'       => 0,
+                    'taggable'    => 0
+                ],
+                'order'        => $count++,
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'driver_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'hidden',
+                'display_name' => 'Driver',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'placa');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => 'Placa',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'modelo');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => 'Modelo',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'type');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_dropdown',
+                'display_name' => 'Tipo',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details' => [
+                    'display' => [
+                        'width' => 6
+                    ],
+                    "options" => [
+                        "movilidad" => "Movilidad",
+                        "motocicleta" => "Motocicleta"
+                    ]
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'created_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('voyager::seeders.data_rows.created_at'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'updated_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('voyager::seeders.data_rows.updated_at'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+        $dataRow = $this->dataRow($VehicleDataType, 'deleted_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => 'deleted_at',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => $count++,
+                'details'      => [
+                    'display'   => [
+                        'width'  => '3',
+                    ],
+                ]
+            ])->save();
+        }
+
+        //vehicles--------------------------------------------
     }
     protected function dataRow($type, $field)
     {
