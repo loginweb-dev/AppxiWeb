@@ -19,6 +19,7 @@ class CreateCustomerLocationsTable extends Migration
             $table->string('direction')->nullable();
             $table->string('latitud')->nullable();
             $table->string('longitud')->nullable();
+            $table->string('maps')->nullable();
             $table->foreignId('customer_id')->constrained();
 
             $table->timestamps();
