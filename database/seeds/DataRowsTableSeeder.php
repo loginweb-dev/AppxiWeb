@@ -1001,7 +1001,6 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-<<<<<<< HEAD
         $dataRow = $this->dataRow($CustomerLocationDataType, 'type');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -1161,9 +1160,6 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
         //customers Locations-------------------------------------------------
-=======
-        //customers-------------------------------------------------
->>>>>>> c6c56dab919554595dde102e6261efa8191e2344
 
         //customer-locations--------
         $count = 1;

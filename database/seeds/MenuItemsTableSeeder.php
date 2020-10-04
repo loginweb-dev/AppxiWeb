@@ -166,7 +166,6 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => $count++,
                 ])->save();
             }
-<<<<<<< HEAD
             // $menuItem = MenuItem::firstOrNew([
             //     'menu_id' => $menu->id,
             //     'title'   => 'Ubicaciones',
@@ -182,23 +181,6 @@ class MenuItemsTableSeeder extends Seeder
             //         'order'      => $count++,
             //     ])->save();
             // }
-=======
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id' => $menu->id,
-                'title'   => 'Nueva ubicacion',
-                'url'     => 'admin/customer_locations/create',
-                'route'   => null
-            ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
-                    'target'     => '_self',
-                    'icon_class' => null,
-                    'color'      => null,
-                    'parent_id'  => null,
-                    'order'      => $count++,
-                ])->save();
-            }
->>>>>>> c6c56dab919554595dde102e6261efa8191e2344
             $menuItem = MenuItem::firstOrNew([
                 'menu_id' => $menu->id,
                 'title'   => 'divider',
