@@ -223,7 +223,7 @@
                                                 @else
                                                     <h4>
                                                         <a data-toggle="tooltip" aria-hidden="true" href="#"
-                                                            onclick="#"
+                                                            onclick="ajax('{{ route('relationship', [$data->id, $row->details->actions->{'table'}, $row->details->actions->{'key'}, $row->details->actions->{'type'}]) }}', 'get')"
                                                             title="{{ $row->details->actions->{'message'} }}">{{ $data->{$row->field} }}</a>
                                                     </h4>
                                                 @endif

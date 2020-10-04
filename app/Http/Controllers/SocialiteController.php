@@ -38,13 +38,12 @@ class SocialiteController extends Controller
    
                        Auth::login($user, true);
 
-                    // Crear Paciente
+                    // Crear Clientes
                     Customer::create([
-                        'name' => $auth_user->name,
-                        'user_id' => $user->id
+                        'user_id' => $user->id,
                     ]);
                    }
-                   return redirect('/home');
+                   return redirect('/admin');
                }
            } else {
            return 'Ops..!! Hubo Problema el usuario necesita un email.!';

@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+
+
+Route::get('/user/{email}/{password}', 'api\UserController@user_get')->name('user_get');
+
+Route::get('/location/{customer_id}', 'api\UserController@custumer_location_get')->name('custumer_location_get');
+
+
+

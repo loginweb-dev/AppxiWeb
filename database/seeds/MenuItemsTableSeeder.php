@@ -166,21 +166,21 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => $count++,
                 ])->save();
             }
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id' => $menu->id,
-                'title'   => 'Ubicaciones',
-                'url'     => 'admin/customer_locations',
-                'route'   => ''
-            ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
-                    'target'     => '_self',
-                    'icon_class' => null,
-                    'color'      => null,
-                    'parent_id'  => null,
-                    'order'      => $count++,
-                ])->save();
-            }
+            // $menuItem = MenuItem::firstOrNew([
+            //     'menu_id' => $menu->id,
+            //     'title'   => 'Ubicaciones',
+            //     'url'     => 'admin/customer_locations',
+            //     'route'   => ''
+            // ]);
+            // if (!$menuItem->exists) {
+            //     $menuItem->fill([
+            //         'target'     => '_self',
+            //         'icon_class' => null,
+            //         'color'      => null,
+            //         'parent_id'  => null,
+            //         'order'      => $count++,
+            //     ])->save();
+            // }
             $menuItem = MenuItem::firstOrNew([
                 'menu_id' => $menu->id,
                 'title'   => 'divider',
@@ -213,7 +213,7 @@ class MenuItemsTableSeeder extends Seeder
             }
 
         //-------------------------------------------------
-
+       
         //-------------------------- BREAD DRIVERS -------------------
         $menudriver = Menu::where('name', 'drivers')->firstOrFail();
         $count=1;

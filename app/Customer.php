@@ -11,4 +11,9 @@ class Customer extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'customers';
     protected $fillable = ['phone', 'nit_ci', 'user_id'];
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'costumer_id');
+    }
 }
