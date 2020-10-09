@@ -12,13 +12,13 @@ class UserController extends Controller
             // The user is being remembered...
             $user = \App\User::where('email', $email)->first();
             $customer = \App\Customer::where('user_id', $user->id)->first();
-            // return $user;
+            // return $user;password
             return response()->json([
                 'user' => $user, 
                 'customer' => $customer
                 ]);
         }else{
-            return  response()->json(['Error' => 'Error en los credenciales']);
+            return  response()->json(['error' => 'Error en los credenciales']);
         }
     }
      
