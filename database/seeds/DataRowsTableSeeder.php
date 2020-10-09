@@ -1,1580 +1,1352 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use TCG\Voyager\Models\DataRow;
-use TCG\Voyager\Models\DataType;
+
 class DataRowsTableSeeder extends Seeder
 {
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
     public function run()
     {
-        $userDataType = DataType::where('slug', 'users')->firstOrFail();
-        $menuDataType = DataType::where('slug', 'menus')->firstOrFail();
-        $roleDataType = DataType::where('slug', 'roles')->firstOrFail();
+        
 
-        $PageDataType = DataType::where('slug', 'pages')->firstOrFail();
-        $BlockDataType = DataType::where('slug', 'blocks')->firstOrFail();
-
-        $CustomerDataType = DataType::where('slug', 'customers')->firstOrFail();
-        $CustomerLocationDataType = DataType::where('slug', 'customer_locations')->firstOrFail();
-
-        $DriverDataType = DataType::where('slug', 'drivers')->firstOrFail();
-
-        $count = 1;
-        $dataRow = $this->dataRow($userDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.name'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'email');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.email'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'password');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'password',
-                'display_name' => __('voyager::seeders.data_rows.password'),
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'remember_token');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.remember_token'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'avatar');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'image',
-                'display_name' => __('voyager::seeders.data_rows.avatar'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'user_belongsto_role_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
-                'display_name' => __('voyager::seeders.data_rows.role'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'model'       => 'TCG\\Voyager\\Models\\Role',
-                    'table'       => 'roles',
-                    'type'        => 'belongsTo',
-                    'column'      => 'role_id',
-                    'key'         => 'id',
-                    'label'       => 'display_name',
-                    'pivot_table' => 'roles',
-                    'pivot'       => 0,
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'user_belongstomany_role_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
+        \DB::table('data_rows')->delete();
+        
+        \DB::table('data_rows')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'data_type_id' => 1,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'data_type_id' => 1,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Nombre',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'data_type_id' => 1,
+                'field' => 'email',
+                'type' => 'text',
+                'display_name' => 'Correo Electrónico',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'data_type_id' => 1,
+                'field' => 'password',
+                'type' => 'password',
+                'display_name' => 'Constraseña',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'data_type_id' => 1,
+                'field' => 'remember_token',
+                'type' => 'text',
+                'display_name' => 'Token de Recuerdo',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'data_type_id' => 1,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'data_type_id' => 1,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'data_type_id' => 1,
+                'field' => 'avatar',
+                'type' => 'image',
+                'display_name' => 'Avatar',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 8,
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'data_type_id' => 1,
+                'field' => 'user_belongsto_role_relationship',
+                'type' => 'relationship',
+                'display_name' => 'Rol',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"model":"TCG\\\\Voyager\\\\Models\\\\Role","table":"roles","type":"belongsTo","column":"role_id","key":"id","label":"display_name","pivot_table":"roles","pivot":0}',
+                'order' => 9,
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'data_type_id' => 1,
+                'field' => 'user_belongstomany_role_relationship',
+                'type' => 'relationship',
                 'display_name' => 'Roles',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'model'       => 'TCG\\Voyager\\Models\\Role',
-                    'table'       => 'roles',
-                    'type'        => 'belongsToMany',
-                    'column'      => 'id',
-                    'key'         => 'id',
-                    'label'       => 'display_name',
-                    'pivot_table' => 'user_roles',
-                    'pivot'       => '1',
-                    'taggable'    => '0',
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'settings');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"model":"TCG\\\\Voyager\\\\Models\\\\Role","table":"roles","type":"belongsToMany","column":"id","key":"id","label":"display_name","pivot_table":"user_roles","pivot":"1","taggable":"0"}',
+                'order' => 10,
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'data_type_id' => 1,
+                'field' => 'settings',
+                'type' => 'hidden',
                 'display_name' => 'Settings',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $count = 1;
-        $dataRow = $this->dataRow($menuDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.name'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $count = 1;
-        $dataRow = $this->dataRow($roleDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.name'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'display_name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.display_name'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'role_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.role'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => $count++,
-            ])->save();
-        }
-
-
-        //--- page ---------------------------------------------
-        $count=1;
-        $dataRow = $this->dataRow($PageDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 11,
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'data_type_id' => 2,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'data_type_id' => 2,
+                'field' => 'name',
+                'type' => 'text',
                 'display_name' => 'Nombre',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '6',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'slug');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            13 => 
+            array (
+                'id' => 14,
+                'data_type_id' => 2,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            14 => 
+            array (
+                'id' => 15,
+                'data_type_id' => 2,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            15 => 
+            array (
+                'id' => 16,
+                'data_type_id' => 3,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'data_type_id' => 3,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Nombre',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'data_type_id' => 3,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'data_type_id' => 3,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'data_type_id' => 3,
+                'field' => 'display_name',
+                'type' => 'text',
+                'display_name' => 'Nombre a Mostrar',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'data_type_id' => 1,
+                'field' => 'role_id',
+                'type' => 'text',
+                'display_name' => 'Rol',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'data_type_id' => 4,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            22 => 
+            array (
+                'id' => 23,
+                'data_type_id' => 4,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Nombre',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"6"}}',
+                'order' => 2,
+            ),
+            23 => 
+            array (
+                'id' => 24,
+                'data_type_id' => 4,
+                'field' => 'slug',
+                'type' => 'text',
                 'display_name' => 'Slug',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'slugify' => [
-                        'origin' => 'name',
-                        'forceUpdate' => true,
-                    ],
-                    'display'   => [
-                        'width'  => '6',
-                    ],
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'description');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"slugify":{"origin":"name","forceUpdate":true},"display":{"width":"6"}}',
+                'order' => 3,
+            ),
+            24 => 
+            array (
+                'id' => 25,
+                'data_type_id' => 4,
+                'field' => 'description',
+                'type' => 'text_area',
                 'display_name' => 'Descripcion',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'direction');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            25 => 
+            array (
+                'id' => 26,
+                'data_type_id' => 4,
+                'field' => 'direction',
+                'type' => 'text',
                 'display_name' => 'Direccion',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'image');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'image',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            26 => 
+            array (
+                'id' => 27,
+                'data_type_id' => 4,
+                'field' => 'image',
+                'type' => 'image',
                 'display_name' => 'Image',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '6',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'details');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'code_editor',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"6"}}',
+                'order' => 6,
+            ),
+            27 => 
+            array (
+                'id' => 28,
+                'data_type_id' => 4,
+                'field' => 'details',
+                'type' => 'code_editor',
                 'display_name' => 'Json',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'user_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'Traking',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            28 => 
+            array (
+                'id' => 29,
+                'data_type_id' => 4,
+                'field' => 'user_id',
+                'type' => 'Traking',
                 'display_name' => 'Trackin User',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ],
-                'order'        => $count++
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($PageDataType, 'deleted_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 8,
+            ),
+            29 => 
+            array (
+                'id' => 30,
+                'data_type_id' => 4,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 9,
+            ),
+            30 => 
+            array (
+                'id' => 31,
+                'data_type_id' => 4,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 10,
+            ),
+            31 => 
+            array (
+                'id' => 32,
+                'data_type_id' => 4,
+                'field' => 'deleted_at',
+                'type' => 'timestamp',
                 'display_name' => 'deleted_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        //pages------------------------------
-
-
-
-
-
-
-        //Blocks------------------------------
-        //-----------------------------------
-        $count = 1;
-        $dataRow = $this->dataRow($BlockDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'page_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 11,
+            ),
+            32 => 
+            array (
+                'id' => 33,
+                'data_type_id' => 5,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 1,
+            ),
+            33 => 
+            array (
+                'id' => 34,
+                'data_type_id' => 5,
+                'field' => 'page_id',
+                'type' => 'hidden',
                 'display_name' => 'page_id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'block_belongsto_page_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 2,
+            ),
+            34 => 
+            array (
+                'id' => 35,
+                'data_type_id' => 5,
+                'field' => 'block_belongsto_page_relationship',
+                'type' => 'relationship',
                 'display_name' => 'Pagina',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    'model'       => 'App\\Page',
-                    'table'       => 'pages',
-                    'type'        => 'belongsTo',
-                    'column'      => 'page_id',
-                    'key'         => 'id',
-                    'label'       => 'name',
-                    'pivot_table' => 'pages',
-                    'pivot'       => 0,
-                ],
-                'order'        =>$count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'type');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6},"model":"App\\\\Page","table":"pages","type":"belongsTo","column":"page_id","key":"id","label":"name","pivot_table":"pages","pivot":0}',
+                'order' => 3,
+            ),
+            35 => 
+            array (
+                'id' => 36,
+                'data_type_id' => 5,
+                'field' => 'type',
+                'type' => 'select_dropdown',
                 'display_name' => 'Tipo',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    "options" => [
-                        "dinamyc-data" => "Datos Dinamicos",
-                        "controller" => "Controlador"
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6},"options":{"dinamyc-data":"Datos Dinamicos","controller":"Controlador"}}',
+                'order' => 4,
+            ),
+            36 => 
+            array (
+                'id' => 37,
+                'data_type_id' => 5,
+                'field' => 'name',
+                'type' => 'text',
                 'display_name' => 'Nombre',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'title');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 5,
+            ),
+            37 => 
+            array (
+                'id' => 38,
+                'data_type_id' => 5,
+                'field' => 'title',
+                'type' => 'text',
                 'display_name' => 'Titulo',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'position');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 6,
+            ),
+            38 => 
+            array (
+                'id' => 39,
+                'data_type_id' => 5,
+                'field' => 'position',
+                'type' => 'number',
                 'display_name' => 'Lugar',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'description');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 7,
+            ),
+            39 => 
+            array (
+                'id' => 40,
+                'data_type_id' => 5,
+                'field' => 'description',
+                'type' => 'text_area',
                 'display_name' => 'Descripcion',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'details');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'code_editor',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 8,
+            ),
+            40 => 
+            array (
+                'id' => 41,
+                'data_type_id' => 5,
+                'field' => 'details',
+                'type' => 'code_editor',
                 'display_name' => 'Details',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 12
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($BlockDataType, 'deleted_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":12}}',
+                'order' => 9,
+            ),
+            41 => 
+            array (
+                'id' => 42,
+                'data_type_id' => 5,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 10,
+            ),
+            42 => 
+            array (
+                'id' => 43,
+                'data_type_id' => 5,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 11,
+            ),
+            43 => 
+            array (
+                'id' => 44,
+                'data_type_id' => 5,
+                'field' => 'deleted_at',
+                'type' => 'timestamp',
                 'display_name' => 'deleted_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-            ])->save();
-        }
-        //Blocks-------------------------------------------------
-
-
-        //customers--------------------------------------------
-        //-----------------------------------------------------
-        $count = 1;
-        $dataRow = $this->dataRow($CustomerDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    'actions' => [
-                        'table' => 'customer_locations',
-                        'key' => 'custumer_id',
-                        'type' => 'create',
-                        'message' => 'New Locations'
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'customer_belongsto_user_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
-                'display_name' => __('User'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    'model'       => 'TCG\\Voyager\\Models\\User',
-                    'table'       => 'users',
-                    'type'        => 'belongsTo',
-                    'column'      => 'user_id',
-                    'key'         => 'id',
-                    'label'       => 'name',
-                    'pivot_table' => 'migrations',
-                    'pivot'       => 0,
-                    'taggable'    => 0
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'phone');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 12,
+            ),
+            44 => 
+            array (
+                'id' => 45,
+                'data_type_id' => 6,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":6},"actions":{"table":"customer_locations","key":"custumer_id","type":"create","message":"New Locations"}}',
+                'order' => 1,
+            ),
+            45 => 
+            array (
+                'id' => 46,
+                'data_type_id' => 6,
+                'field' => 'customer_belongsto_user_relationship',
+                'type' => 'relationship',
+                'display_name' => 'User',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6},"model":"TCG\\\\Voyager\\\\Models\\\\User","table":"users","type":"belongsTo","column":"user_id","key":"id","label":"name","pivot_table":"migrations","pivot":0,"taggable":0}',
+                'order' => 2,
+            ),
+            46 => 
+            array (
+                'id' => 47,
+                'data_type_id' => 6,
+                'field' => 'phone',
+                'type' => 'text',
                 'display_name' => 'Telefono',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'nit_ci');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 3,
+            ),
+            47 => 
+            array (
+                'id' => 48,
+                'data_type_id' => 6,
+                'field' => 'nit_ci',
+                'type' => 'text',
                 'display_name' => 'Carnet o NIT',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'user_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 4,
+            ),
+            48 => 
+            array (
+                'id' => 49,
+                'data_type_id' => 6,
+                'field' => 'user_id',
+                'type' => 'hidden',
                 'display_name' => 'Traking',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerDataType, 'deleted_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 5,
+            ),
+            49 => 
+            array (
+                'id' => 50,
+                'data_type_id' => 6,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 6,
+            ),
+            50 => 
+            array (
+                'id' => 51,
+                'data_type_id' => 6,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 7,
+            ),
+            51 => 
+            array (
+                'id' => 52,
+                'data_type_id' => 6,
+                'field' => 'deleted_at',
+                'type' => 'timestamp',
                 'display_name' => 'deleted_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        //customers-------------------------------------------------
-
-        //customers Locations--------------------------------------------
-        //-----------------------------------------------------
-        $count = 1;
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-     
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'location_belongsto_customer_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 8,
+            ),
+            52 => 
+            array (
+                'id' => 53,
+                'data_type_id' => 7,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 1,
+            ),
+            53 => 
+            array (
+                'id' => 54,
+                'data_type_id' => 7,
+                'field' => 'location_belongsto_customer_relationship',
+                'type' => 'relationship',
                 'display_name' => 'Cliente',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    'model'       => 'App\\Customer',
-                    'table'       => 'customers',
-                    'type'        => 'belongsTo',
-                    'column'      => 'customer_id',
-                    'key'         => 'id',
-                    'label'       => 'phone',
-                    'pivot_table' => 'customers',
-                    'pivot'       => 0,
-                    'taggable'    => 0
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'type');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6},"model":"App\\\\Customer","table":"customers","type":"belongsTo","column":"customer_id","key":"id","label":"phone","pivot_table":"customers","pivot":0,"taggable":0}',
+                'order' => 2,
+            ),
+            54 => 
+            array (
+                'id' => 55,
+                'data_type_id' => 7,
+                'field' => 'type',
+                'type' => 'select_dropdown',
                 'display_name' => 'Telefono',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    'options' => [
-                        'Casa o Domicilio' => 'Casa o Domicilio',
-                        'Oficina o Trabajo' => 'Oficina o Trabajo',
-                        'Deportes o Diversion' => 'Deportes o Diversion',
-                        'Otros Lugares' => 'Otros Lugares'
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'direction');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6},"options":{"Casa o Domicilio":"Casa o Domicilio","Oficina o Trabajo":"Oficina o Trabajo","Deportes o Diversion":"Deportes o Diversion","Otros Lugares":"Otros Lugares"}}',
+                'order' => 3,
+            ),
+            55 => 
+            array (
+                'id' => 56,
+                'data_type_id' => 7,
+                'field' => 'direction',
+                'type' => 'text_area',
                 'display_name' => 'Direccion',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'latitud');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 4,
+            ),
+            56 => 
+            array (
+                'id' => 57,
+                'data_type_id' => 7,
+                'field' => 'latitud',
+                'type' => 'text',
                 'display_name' => 'Latitud',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'longitud');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 5,
+            ),
+            57 => 
+            array (
+                'id' => 58,
+                'data_type_id' => 7,
+                'field' => 'longitud',
+                'type' => 'text',
                 'display_name' => 'Longitud',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'customer_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 6,
+            ),
+            58 => 
+            array (
+                'id' => 59,
+                'data_type_id' => 7,
+                'field' => 'customer_id',
+                'type' => 'hidden',
                 'display_name' => 'Cliente',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'deleted_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 7,
+            ),
+            59 => 
+            array (
+                'id' => 60,
+                'data_type_id' => 7,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 8,
+            ),
+            60 => 
+            array (
+                'id' => 61,
+                'data_type_id' => 7,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 9,
+            ),
+            61 => 
+            array (
+                'id' => 62,
+                'data_type_id' => 7,
+                'field' => 'deleted_at',
+                'type' => 'timestamp',
                 'display_name' => 'deleted_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        //customers Locations-------------------------------------------------
-
-        //customer-locations--------
-        $count = 1;
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'customer_locations_belongsto_customer_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
-                'display_name' => __('Customer'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '6',
-                    ],
-                    'model'       => 'App\\Customer',
-                    'table'       => 'customers',
-                    'type'        => 'belongsTo',
-                    'column'      => 'customer_id',
-                    'key'         => 'id',
-                    'label'       => 'phone',
-                    'pivot_table' => 'migrations',
-                    'pivot'       => 0,
-                    'taggable'    => 0
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'type');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
-                'display_name' => 'Tipo',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ],
-                    "options" => [
-                        "casa" => "Casa",
-                        "domicilio" => "Domicilio"
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'direction');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
-                'display_name' => 'Direccion',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'maps');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'Map',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 10,
+            ),
+            62 => 
+            array (
+                'id' => 63,
+                'data_type_id' => 7,
+                'field' => 'customer_locations_belongsto_customer_relationship',
+                'type' => 'relationship',
+                'display_name' => 'Customer',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"6"},"model":"App\\\\Customer","table":"customers","type":"belongsTo","column":"customer_id","key":"id","label":"phone","pivot_table":"migrations","pivot":0,"taggable":0}',
+                'order' => 1,
+            ),
+            63 => 
+            array (
+                'id' => 64,
+                'data_type_id' => 7,
+                'field' => 'maps',
+                'type' => 'Map',
                 'display_name' => 'Latitud y Longitud',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'latitud');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
-                'display_name' => 'Latitud',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'longitud');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
-                'display_name' => 'Longitud',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'customer_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
-                'display_name' => 'Trackin Customer',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ],
-                'order'        => $count++
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($CustomerLocationDataType, 'deleted_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'deleted_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        //customer-locations------------
-
-        //drivers--------------------------------------------
-        //-----------------------------------------------------
-        $count = 1;
-        $dataRow = $this->dataRow($DriverDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => __('voyager::seeders.data_rows.id'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'first_name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Nombre',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'last_name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Apellidos',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'phone');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 2,
+            ),
+            64 => 
+            array (
+                'id' => 65,
+                'data_type_id' => 8,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'ID',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 1,
+            ),
+            65 => 
+            array (
+                'id' => 68,
+                'data_type_id' => 8,
+                'field' => 'phone',
+                'type' => 'text',
                 'display_name' => 'Telefono',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details' => [
-                    'display' => [
-                        'width' => 6
-                    ]
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'user_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'hidden',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":6}}',
+                'order' => 12,
+            ),
+            66 => 
+            array (
+                'id' => 69,
+                'data_type_id' => 8,
+                'field' => 'user_id',
+                'type' => 'hidden',
                 'display_name' => 'Traking',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.created_at'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => __('voyager::seeders.data_rows.updated_at'),
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'deleted_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 2,
+            ),
+            67 => 
+            array (
+                'id' => 70,
+                'data_type_id' => 8,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Creado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 3,
+            ),
+            68 => 
+            array (
+                'id' => 71,
+                'data_type_id' => 8,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Actualizado',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 4,
+            ),
+            69 => 
+            array (
+                'id' => 72,
+                'data_type_id' => 8,
+                'field' => 'deleted_at',
+                'type' => 'timestamp',
                 'display_name' => 'deleted_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'order'        => $count++,
-                'details'      => [
-                    'display'   => [
-                        'width'  => '3',
-                    ],
-                ]
-            ])->save();
-        }
-        $dataRow = $this->dataRow($DriverDataType, 'driver_belongsto_user_relationship');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'relationship',
-                'display_name' => __('User'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => [
-                    'model'       => 'TCG\\Voyager\\Models\\User',
-                    'table'       => 'users',
-                    'type'        => 'belongsTo',
-                    'column'      => 'user_id',
-                    'key'         => 'id',
-                    'label'       => 'name',
-                    'pivot_table' => 'migrations',
-                    'pivot'       => 0,
-                    'taggable'    => 0
-                ],
-                'order'        => $count++,
-            ])->save();
-        }
-        //drivers--------------------------------------------
-
-    }
-    protected function dataRow($type, $field)
-    {
-        return DataRow::firstOrNew([
-            'data_type_id' => $type->id,
-            'field'        => $field,
-        ]);
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{"display":{"width":"3"}}',
+                'order' => 5,
+            ),
+            70 => 
+            array (
+                'id' => 73,
+                'data_type_id' => 8,
+                'field' => 'driver_belongsto_user_relationship',
+                'type' => 'relationship',
+                'display_name' => 'User',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{"model":"TCG\\\\Voyager\\\\Models\\\\User","table":"users","type":"belongsTo","column":"user_id","key":"id","label":"name","pivot_table":"migrations","pivot":"0","taggable":"on"}',
+                'order' => 6,
+            ),
+            71 => 
+            array (
+                'id' => 74,
+                'data_type_id' => 8,
+                'field' => 'photo_plaque',
+                'type' => 'image',
+                'display_name' => 'Foto Placa',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6}}',
+                'order' => 7,
+            ),
+            72 => 
+            array (
+                'id' => 75,
+                'data_type_id' => 8,
+                'field' => 'photo_license',
+                'type' => 'image',
+                'display_name' => 'Foto Breve',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6}}',
+                'order' => 8,
+            ),
+            73 => 
+            array (
+                'id' => 76,
+                'data_type_id' => 8,
+                'field' => 'photo_car',
+                'type' => 'image',
+                'display_name' => 'Foto Movilidad',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6}}',
+                'order' => 9,
+            ),
+            74 => 
+            array (
+                'id' => 77,
+                'data_type_id' => 8,
+                'field' => 'photo_qr',
+                'type' => 'image',
+                'display_name' => 'Foto Qr',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6}}',
+                'order' => 10,
+            ),
+            75 => 
+            array (
+                'id' => 78,
+                'data_type_id' => 8,
+                'field' => 'photo_ci',
+                'type' => 'image',
+                'display_name' => 'Foto CI',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6}}',
+                'order' => 11,
+            ),
+            76 => 
+            array (
+                'id' => 79,
+                'data_type_id' => 8,
+                'field' => 'bank',
+                'type' => 'select_dropdown',
+                'display_name' => 'Bancos',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6},"default":"option","options":{"1":"Banco Union","2":"Banco Ganadero","3":"Banco BNB","4":"Banco Mercatil Santa Cruz","5":"Banco Prodem","option":"Seleccione"}}',
+                'order' => 14,
+            ),
+            77 => 
+            array (
+                'id' => 80,
+                'data_type_id' => 8,
+                'field' => 'payment_time',
+                'type' => 'select_dropdown',
+                'display_name' => 'Tiempo de Pago',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6},"default":"option","options":{"1":"Diario","2":"Semanal","3":"Mensual","option":"Seleccione"}}',
+                'order' => 15,
+            ),
+            78 => 
+            array (
+                'id' => 81,
+                'data_type_id' => 8,
+                'field' => 'payment_options',
+                'type' => 'select_dropdown',
+                'display_name' => 'Metodo de Pago',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6},"default":"option","options":{"1":"Efectivo","2":"Transferencia Bancaria","option":"Seleccione"}}',
+                'order' => 16,
+            ),
+            79 => 
+            array (
+                'id' => 82,
+                'data_type_id' => 8,
+                'field' => 'status',
+                'type' => 'checkbox',
+                'display_name' => 'Estado',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6},"on":"Disponible","off":"No Disponiblet","checked":true}',
+                'order' => 13,
+            ),
+            80 => 
+            array (
+                'id' => 83,
+                'data_type_id' => 8,
+                'field' => 'address',
+                'type' => 'text_area',
+                'display_name' => 'Dirrecion',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"display":{"width":6}}',
+                'order' => 17,
+            ),
+            81 => 
+            array (
+                'id' => 84,
+                'data_type_id' => 8,
+                'field' => 'latitude',
+                'type' => 'hidden',
+                'display_name' => 'Latitude',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 18,
+            ),
+            82 => 
+            array (
+                'id' => 85,
+                'data_type_id' => 8,
+                'field' => 'longitude',
+                'type' => 'hidden',
+                'display_name' => 'Longitude',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 19,
+            ),
+        ));
+        
+        
     }
 }
