@@ -35,8 +35,8 @@ class DriversTableSeeder extends Seeder
                 'payment_options' => '2',
                 'status' => '1',
                 'address' => 'zona santa ines',
-                'latitude' => NULL,
-                'longitude' => NULL,
+                'latitude' => '0',
+                'longitude' => '0',
             ),
         ));
         
