@@ -44,6 +44,16 @@
                         </div>
 
                         <div class="md-form">
+                            <input type="text" id="phone" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required>
+                            <label for="phone">Telefono</label>
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="md-form">
                             <input type="email" id="email" class="form-control @error('name') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
                             <label for="email">Tu email</label>
                             @error('email')

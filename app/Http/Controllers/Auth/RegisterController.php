@@ -72,6 +72,7 @@ class RegisterController extends Controller
 
         Customer::create([
             'user_id' => $user->id,
+            'phone' => $data['phone']
         ]);
         
         return $user;
